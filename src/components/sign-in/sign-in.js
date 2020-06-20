@@ -4,6 +4,8 @@ import "./sign-in.scss";
 
 import FormInput from "../form-input/form-input";
 
+import CustomButton from "../custom-button/custom-button";
+
 const SignIn = () => {
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
@@ -59,7 +61,7 @@ const SignIn = () => {
           label="password"
         />
 
-        <input type="submit" value="Submit Form" />
+        <CustomButton type="submit">Sign In</CustomButton>
       </form>
     </div>
   );

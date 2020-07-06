@@ -62,12 +62,11 @@ const SignIn = () => {
           handleChange={handleChange}
           label="password"
         />
-        <div className="buttons">
-          <CustomButton type="submit">Sign In</CustomButton>
-          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
-            Sign In with Google
-          </CustomButton>
-        </div>
+
+        <CustomButton type="submit">Sign In</CustomButton>
+        <CustomButton onClick={signInWithGoogle}>
+          Sign In with Google
+        </CustomButton>
       </form>
     </div>
   );

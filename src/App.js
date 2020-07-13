@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Switch, Route, Link } from "react-router-dom";
 
@@ -15,11 +15,26 @@ import {
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      createUserProfileDocument(user);
+    unsubscribeFromAuth.current = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
+          });
+        });
+
+        console.log(currentUser);
+      } else {
+        setCurrentUser(userAuth);
+      }
     });
+
     return () => {
       unsubscribeFromAuth();
     };
